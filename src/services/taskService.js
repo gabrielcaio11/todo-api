@@ -1,8 +1,9 @@
 import Task from '../models/Task.js';
+import { AppError } from '../utils/AppError.js';
 
 export const createTaskService = async (data) => {
   if (!data.title) {
-    throw new Error('Title is required');
+    throw new AppError('Title is required', 400);
   }
 
   return await Task.create(data);
@@ -16,7 +17,7 @@ export const getTaskByIdService = async (id) => {
   const task = await Task.findById(id);
 
   if (!task) {
-    throw new Error('Task not found');
+    throw new AppError('Task not found', 404);
   }
 
   return task;
@@ -28,7 +29,7 @@ export const updateTaskService = async (id, data) => {
   });
 
   if (!updatedTask) {
-    throw new Error('Task not found');
+    throw new AppError('Task not found', 404);
   }
 
   return updatedTask;
@@ -38,7 +39,7 @@ export const deleteTaskService = async (id) => {
   const deletedTask = await Task.findByIdAndDelete(id);
 
   if (!deletedTask) {
-    throw new Error('Task not found');
+    throw new AppError('Task not found', 404);
   }
 
   return;
