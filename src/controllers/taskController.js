@@ -6,47 +6,47 @@ import {
   deleteTaskService
 } from '../services/taskService.js';
 
-export const createTask = async (req, res) => {
+export const createTask = async (req, res, next) => {
   try {
     const task = await createTaskService(req.body);
     return res.status(201).json(task);
   } catch (error) {
-    return res.status(400).json({ error: error.message });
+    return next(error);
   }
 };
 
-export const getAllTasks = async (req, res) => {
+export const getAllTasks = async (req, res, next) => {
   try {
     const tasks = await getAllTasksService();
     return res.json(tasks);
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    return next(error);
   }
 };
 
-export const getTaskById = async (req, res) => {
+export const getTaskById = async (req, res, next) => {
   try {
     const task = await getTaskByIdService(req.params.id);
     return res.json(task);
   } catch (error) {
-    return res.status(404).json({ error: error.message });
+    return next(error);
   }
 };
 
-export const updateTask = async (req, res) => {
+export const updateTask = async (req, res, next) => {
   try {
     const task = await updateTaskService(req.params.id, req.body);
     return res.json(task);
   } catch (error) {
-    return res.status(404).json({ error: error.message });
+    return next(error);
   }
 };
 
-export const deleteTask = async (req, res) => {
+export const deleteTask = async (req, res, next) => {
   try {
     await deleteTaskService(req.params.id);
     return res.json({ message: 'Task deleted successfully' });
   } catch (error) {
-    return res.status(404).json({ error: error.message });
+    return next(error);
   }
 };
