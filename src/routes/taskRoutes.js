@@ -15,9 +15,7 @@ router.get('/', getAllTasks);
 
 router.get('/:id', getTaskById);
 
-
 router.put('/:id', updateTask);
-
 
 router.delete('/:id', deleteTask);
 
