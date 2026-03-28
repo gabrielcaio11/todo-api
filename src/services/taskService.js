@@ -9,8 +9,31 @@ export const createTaskService = async (data) => {
   return await Task.create(data);
 };
 
-export const getAllTasksService = async () => {
-  return await Task.find();
+export const getAllTasksService = async (query) => {
+  const { page = 1, limit = 10, completed, sort = 'createdAt' } = query;
+
+  const filter = {};
+
+  if (completed !== undefined) {
+    filter.completed = completed === 'true';
+  }
+
+  const skip = (page - 1) * limit;
+
+  const tasks = await Task.find(filter)
+    .sort(sort)
+    .skip(skip)
+    .limit(Number(limit));
+
+  const total = await Task.countDocuments(filter);
+
+  return {
+    total,
+    page: Number(page),
+    limit: Number(limit),
+    totalPages: Math.ceil(total / limit),
+    data: tasks
+  };
 };
 
 export const getTaskByIdService = async (id) => {

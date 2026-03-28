@@ -17,7 +17,7 @@ export const createTask = async (req, res, next) => {
 
 export const getAllTasks = async (req, res, next) => {
   try {
-    const tasks = await getAllTasksService();
+    const tasks = await getAllTasksService(req.query);
     return res.json(tasks);
   } catch (error) {
     return next(error);
