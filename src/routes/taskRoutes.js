@@ -1,24 +1,24 @@
-import express from 'express';
+import express from "express";
 import {
   createTask,
   getAllTasks,
   getTaskById,
   updateTask,
-  deleteTask
-} from '../controllers/taskController.js';
+  deleteTask,
+} from "../controllers/taskController.js";
 
-import { validateTask } from '../middlewares/validateTask.js';
+import { validateTask } from "../middlewares/validateTask.js";
 
 const router = express.Router();
 
-router.post('/', validateTask, createTask);
+router.post("/", validateTask, createTask);
 
-router.get('/', getAllTasks);
+router.get("/", getAllTasks);
 
-router.get('/:id', getTaskById);
+router.get("/:id", getTaskById);
 
-router.put('/:id', validateTask, updateTask);
+router.put("/:id", validateTask, updateTask);
 
-router.delete('/:id', deleteTask);
+router.delete("/:id", deleteTask);
 
 export default router;

@@ -1,21 +1,21 @@
-import Task from '../models/Task.js';
-import { AppError } from '../utils/AppError.js';
+import Task from "../models/Task.js";
+import { AppError } from "../utils/AppError.js";
 
 export const createTaskService = async (data) => {
   if (!data.title) {
-    throw new AppError('Title is required', 400);
+    throw new AppError("Title is required", 400);
   }
 
   return await Task.create(data);
 };
 
 export const getAllTasksService = async (query) => {
-  const { page = 1, limit = 10, completed, sort = 'createdAt' } = query;
+  const { page = 1, limit = 10, completed, sort = "createdAt" } = query;
 
   const filter = {};
 
   if (completed !== undefined) {
-    filter.completed = completed === 'true';
+    filter.completed = completed === "true";
   }
 
   const skip = (page - 1) * limit;
@@ -32,7 +32,7 @@ export const getAllTasksService = async (query) => {
     page: Number(page),
     limit: Number(limit),
     totalPages: Math.ceil(total / limit),
-    data: tasks
+    data: tasks,
   };
 };
 
@@ -40,7 +40,7 @@ export const getTaskByIdService = async (id) => {
   const task = await Task.findById(id);
 
   if (!task) {
-    throw new AppError('Task not found', 404);
+    throw new AppError("Task not found", 404);
   }
 
   return task;
@@ -48,11 +48,11 @@ export const getTaskByIdService = async (id) => {
 
 export const updateTaskService = async (id, data) => {
   const updatedTask = await Task.findByIdAndUpdate(id, data, {
-    new: true
+    new: true,
   });
 
   if (!updatedTask) {
-    throw new AppError('Task not found', 404);
+    throw new AppError("Task not found", 404);
   }
 
   return updatedTask;
@@ -62,7 +62,7 @@ export const deleteTaskService = async (id) => {
   const deletedTask = await Task.findByIdAndDelete(id);
 
   if (!deletedTask) {
-    throw new AppError('Task not found', 404);
+    throw new AppError("Task not found", 404);
   }
 
   return;
