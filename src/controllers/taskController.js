@@ -3,8 +3,8 @@ import {
   getAllTasksService,
   getTaskByIdService,
   updateTaskService,
-  deleteTaskService
-} from '../services/taskService.js';
+  deleteTaskService,
+} from "../services/taskService.js";
 
 export const createTask = async (req, res, next) => {
   try {
@@ -45,7 +45,7 @@ export const updateTask = async (req, res, next) => {
 export const deleteTask = async (req, res, next) => {
   try {
     await deleteTaskService(req.params.id);
-    return res.json({ message: 'Task deleted successfully' });
+    return res.json({ message: "Task deleted successfully" });
   } catch (error) {
     return next(error);
   }

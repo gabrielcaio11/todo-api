@@ -1,27 +1,27 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const taskSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: [true, 'Title is required'],
-      minlength: [3, 'Title must be at least 3 characters'],
-      trim: true
+      required: [true, "Title is required"],
+      minlength: [3, "Title must be at least 3 characters"],
+      trim: true,
     },
     description: {
       type: String,
-      default: ''
+      default: "",
     },
     completed: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   {
-    timestamps: true
-  }
+    timestamps: true,
+  },
 );
 
-const Task = mongoose.model('Task', taskSchema);
+const Task = mongoose.model("Task", taskSchema);
 
 export default Task;

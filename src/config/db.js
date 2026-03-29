@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 export const connectDB = async () => {
   try {
@@ -8,9 +8,9 @@ export const connectDB = async () => {
 
     await mongoose.connection.db.admin().ping();
 
-    console.log('Ping no banco OK ✅');
+    console.log("Ping no banco OK ✅");
   } catch (error) {
-    console.error('Erro ao conectar no MongoDB:', error);
+    console.error("Erro ao conectar no MongoDB:", error);
     process.exit(1);
   }
 };
